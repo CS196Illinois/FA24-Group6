@@ -33,6 +33,11 @@
 
         .header button:hover {
             background-color: #0056b3;
+            transition: transform 0.2s;
+        }
+
+        .header button:hover {
+            transform: scale(1.05);
         }
 
         /* Layout for lists */
@@ -57,6 +62,16 @@
             text-align: center;
             margin-bottom: 10px;
         }
+        
+        /* Styling for search */
+        .search-input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 90%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
         /* Example styling for list items */
         .scrollable-list ul {
@@ -74,6 +89,7 @@
     </div>
 
     <p>Select the Ingredients</p>
+    <input type="text" class="search-input" placeholder="Search Ingredients" onkeyup="filterList('vegetables', this)">
 
     <form action="/generate_recipe" method="POST">
         <div class="list-container">
