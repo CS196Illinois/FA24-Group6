@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Plan App</title>
+    <style>
+        /* Basic styling for header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+            background-color: #f0f0f0;
+            border-bottom: 2px solid #ccc;
+        }
+
+        /* Style for title */
+        .header h1 {
+            margin: 0;
+        }
+
+        /* Style for button */
+        .header button {
+            padding: 10px 15px;
+            background-color: #a600ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 25px; 
+        }
+
+        .header button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Layout for lists */
+        .list-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        /* Styling for individual list */
+        .scrollable-list {
+            width: 30%;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            height: 200px; /* Fixed height to enable scrolling */
+            overflow-y: auto;
+        }
+
+        /* Styling for list titles */
+        .scrollable-list h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Example styling for list items */
+        .scrollable-list ul {
+            padding-left: 20px;
+        }
+
+        .scrollable-list li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Meal Plan App</h1>
+    </div>
+
+    <p>Select the Ingredients</p>
+
+    <form action="/generate_recipe" method="POST">
+        <div class="list-container">
+            <!-- Scrollable list 1: Vegetables -->
+            <div class="scrollable-list">
+                <h2>Vegetables</h2>
+                <ul>
+                    <li><input type="checkbox" name="vegetables" value="Carrots"> Carrots</li>
+                    <li><input type="checkbox" name="vegetables" value="Broccoli"> Broccoli</li>
+                    <li><input type="checkbox" name="vegetables" value="Spinach"> Spinach</li>
+                    <li><input type="checkbox" name="vegetables" value="Tomatoes"> Tomatoes</li>
+                    <li><input type="checkbox" name="vegetables" value="Bell Peppers"> Bell Peppers</li>
+                    <li><input type="checkbox" name="vegetables" value="Cauliflower"> Cauliflower</li>
+                    <li><input type="checkbox" name="vegetables" value="Onions"> Onions</li>
+                    <li><input type="checkbox" name="vegetables" value="Lettuce"> Lettuce</li>
+                </ul>
+            </div>
+
+            <!-- Scrollable list 2: Meat -->
+            <div class="scrollable-list">
+                <h2>Meat</h2>
+                <ul>
+                    <li><input type="checkbox" name="meat" value="Chicken Breast"> Chicken Breast</li>
+                    <li><input type="checkbox" name="meat" value="Ground Beef"> Ground Beef</li>
+                    <li><input type="checkbox" name="meat" value="Pork Chops"> Pork Chops</li>
+                    <li><input type="checkbox" name="meat" value="Turkey"> Turkey</li>
+                </ul>
+            </div>
+
+            <!-- Scrollable list 3: Dairy -->
+            <div class="scrollable-list">
+                <h2>Dairy</h2>
+                <ul>
+                    <li><input type="checkbox" name="dairy" value="Milk"> Milk</li>
+                    <li><input type="checkbox" name="dairy" value="Cheddar Cheese"> Cheddar Cheese</li>
+                    <li><input type="checkbox" name="dairy" value="Yogurt"> Yogurt</li>
+                    <li><input type="checkbox" name="dairy" value="Butter"> Butter</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header">
+            <!-- Submit the form to /generate_recipe -->
+            <button type="submit">Generate Recipe</button>
+        </div>
+    </form>
+</body>
+</html>
