@@ -111,6 +111,35 @@
             color: darkred;
         }
 
+        /* Styling for search input */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            margin-top: 15px; /* Added margin-top to create space from the text */
+        }
+
+        .search-input {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-btn {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+
         /* Example styling for list items */
         .scrollable-list ul {
             padding-left: 20px;
@@ -119,6 +148,11 @@
         .scrollable-list li {
             margin: 5px 0;
         }
+
+        /* Add margin to p */
+        p {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -126,12 +160,19 @@
         <h1>Meal Plan App</h1>
     </div>
 
+    <!-- Add some margin to create space between the search bar and text -->
     <p>Select the Ingredients</p>
+
+    <!-- Search container with input and button -->
+    <div class="search-container">
+        <input type="text" class="search-input" id="search-bar" placeholder="Search Ingredients" onkeyup="filterList()">
+        <button class="search-btn" onclick="filterList()">Search</button>
+    </div>
 
     <form action="/generate_recipe" method="POST">
         <div class="list-container">
             <!-- Scrollable list 1: Vegetables -->
-            <div class="scrollable-list">
+            <div class="scrollable-list" id="vegetable-list">
                 <h2>Vegetables</h2>
                 <ul>
                     <li><input type="checkbox" name="vegetables" value="Carrots" onclick="toggleIngredient(this)"> Carrots</li>
@@ -146,7 +187,7 @@
             </div>
 
             <!-- Scrollable list 2: Meat -->
-            <div class="scrollable-list">
+            <div class="scrollable-list" id="meat-list">
                 <h2>Meat</h2>
                 <ul>
                     <li><input type="checkbox" name="meat" value="Chicken Breast" onclick="toggleIngredient(this)"> Chicken Breast</li>
@@ -157,7 +198,7 @@
             </div>
 
             <!-- Scrollable list 3: Dairy -->
-            <div class="scrollable-list">
+            <div class="scrollable-list" id="dairy-list">
                 <h2>Dairy</h2>
                 <ul>
                     <li><input type="checkbox" name="dairy" value="Milk" onclick="toggleIngredient(this)"> Milk</li>
@@ -213,6 +254,21 @@
             if (checkbox) {
                 checkbox.checked = false;
             }
+        }
+
+        // Function to filter ingredients based on search input
+        function filterList() {
+            const searchValue = document.getElementById('search-bar').value.toLowerCase();
+            const lists = document.querySelectorAll('.scrollable-list ul li');
+
+            lists.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchValue)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
