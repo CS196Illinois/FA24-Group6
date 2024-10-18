@@ -43,18 +43,23 @@
         /* Layout for lists */
         .list-container {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             padding: 20px;
+        }
+
+        /* Spacing between boxes */
+        .scrollable-list, .cart {
+            margin-right: 15px; /* Space between sections */
         }
 
         /* Styling for individual list */
         .scrollable-list {
-            width: 30%;
+            width: 24%;
             border: 1px solid #ccc;
             padding: 10px;
             border-radius: 8px;
-            height: 200px; /* Fixed height to enable scrolling */
-            overflow-y: auto;
+            height: 300px; /* Increased height to make boxes bigger */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         /* Styling for list titles */
@@ -62,15 +67,48 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        
-        /* Styling for search */
-        .search-input {
-            margin-bottom: 10px;
+
+        /* Scrollable cart styling */
+        .cart {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            width: 24%; /* Match width with other lists */
+            height: 300px; /* Match height with other lists */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .cart h2 {
+            text-align: center;
+        }
+
+        .cart ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 5px;
-            width: 90%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Styling for red X button */
+        .remove-btn {
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0 5px;
+            border: none;
+            background: none;
+            font-size: 18px;
+        }
+
+        .remove-btn:hover {
+            color: darkred;
         }
 
         /* Example styling for list items */
@@ -89,7 +127,6 @@
     </div>
 
     <p>Select the Ingredients</p>
-    <input type="text" class="search-input" placeholder="Search Ingredients" onkeyup="filterList('vegetables', this)">
 
     <form action="/generate_recipe" method="POST">
         <div class="list-container">
@@ -97,14 +134,14 @@
             <div class="scrollable-list">
                 <h2>Vegetables</h2>
                 <ul>
-                    <li><input type="checkbox" name="vegetables" value="Carrots"> Carrots</li>
-                    <li><input type="checkbox" name="vegetables" value="Broccoli"> Broccoli</li>
-                    <li><input type="checkbox" name="vegetables" value="Spinach"> Spinach</li>
-                    <li><input type="checkbox" name="vegetables" value="Tomatoes"> Tomatoes</li>
-                    <li><input type="checkbox" name="vegetables" value="Bell Peppers"> Bell Peppers</li>
-                    <li><input type="checkbox" name="vegetables" value="Cauliflower"> Cauliflower</li>
-                    <li><input type="checkbox" name="vegetables" value="Onions"> Onions</li>
-                    <li><input type="checkbox" name="vegetables" value="Lettuce"> Lettuce</li>
+                    <li><input type="checkbox" name="vegetables" value="Carrots" onclick="toggleIngredient(this)"> Carrots</li>
+                    <li><input type="checkbox" name="vegetables" value="Broccoli" onclick="toggleIngredient(this)"> Broccoli</li>
+                    <li><input type="checkbox" name="vegetables" value="Spinach" onclick="toggleIngredient(this)"> Spinach</li>
+                    <li><input type="checkbox" name="vegetables" value="Tomatoes" onclick="toggleIngredient(this)"> Tomatoes</li>
+                    <li><input type="checkbox" name="vegetables" value="Bell Peppers" onclick="toggleIngredient(this)"> Bell Peppers</li>
+                    <li><input type="checkbox" name="vegetables" value="Cauliflower" onclick="toggleIngredient(this)"> Cauliflower</li>
+                    <li><input type="checkbox" name="vegetables" value="Onions" onclick="toggleIngredient(this)"> Onions</li>
+                    <li><input type="checkbox" name="vegetables" value="Lettuce" onclick="toggleIngredient(this)"> Lettuce</li>
                 </ul>
             </div>
 
@@ -112,10 +149,10 @@
             <div class="scrollable-list">
                 <h2>Meat</h2>
                 <ul>
-                    <li><input type="checkbox" name="meat" value="Chicken Breast"> Chicken Breast</li>
-                    <li><input type="checkbox" name="meat" value="Ground Beef"> Ground Beef</li>
-                    <li><input type="checkbox" name="meat" value="Pork Chops"> Pork Chops</li>
-                    <li><input type="checkbox" name="meat" value="Turkey"> Turkey</li>
+                    <li><input type="checkbox" name="meat" value="Chicken Breast" onclick="toggleIngredient(this)"> Chicken Breast</li>
+                    <li><input type="checkbox" name="meat" value="Ground Beef" onclick="toggleIngredient(this)"> Ground Beef</li>
+                    <li><input type="checkbox" name="meat" value="Pork Chops" onclick="toggleIngredient(this)"> Pork Chops</li>
+                    <li><input type="checkbox" name="meat" value="Turkey" onclick="toggleIngredient(this)"> Turkey</li>
                 </ul>
             </div>
 
@@ -123,11 +160,17 @@
             <div class="scrollable-list">
                 <h2>Dairy</h2>
                 <ul>
-                    <li><input type="checkbox" name="dairy" value="Milk"> Milk</li>
-                    <li><input type="checkbox" name="dairy" value="Cheddar Cheese"> Cheddar Cheese</li>
-                    <li><input type="checkbox" name="dairy" value="Yogurt"> Yogurt</li>
-                    <li><input type="checkbox" name="dairy" value="Butter"> Butter</li>
+                    <li><input type="checkbox" name="dairy" value="Milk" onclick="toggleIngredient(this)"> Milk</li>
+                    <li><input type="checkbox" name="dairy" value="Cheddar Cheese" onclick="toggleIngredient(this)"> Cheddar Cheese</li>
+                    <li><input type="checkbox" name="dairy" value="Yogurt" onclick="toggleIngredient(this)"> Yogurt</li>
+                    <li><input type="checkbox" name="dairy" value="Butter" onclick="toggleIngredient(this)"> Butter</li>
                 </ul>
+            </div>
+
+            <!-- Scrollable cart to display selected ingredients next to Dairy -->
+            <div class="cart">
+                <h2>Selected Ingredients (Cart)</h2>
+                <ul id="cart-list"></ul>
             </div>
         </div>
 
@@ -136,5 +179,41 @@
             <button type="submit">Generate Recipe</button>
         </div>
     </form>
+
+    <script>
+        // Function to toggle ingredients in the cart
+        function toggleIngredient(checkbox) {
+            const cartList = document.getElementById('cart-list');
+            const ingredient = checkbox.value;
+
+            if (checkbox.checked) {
+                // Add the ingredient to the cart with a red "X" button
+                const listItem = document.createElement('li');
+                listItem.setAttribute('data-value', ingredient);
+                listItem.innerHTML = `
+                    <span>${ingredient}</span>
+                    <button class="remove-btn" onclick="removeFromCart('${ingredient}')">X</button>
+                `;
+                cartList.appendChild(listItem);
+            } else {
+                // Remove the ingredient from the cart
+                removeFromCart(ingredient);
+            }
+        }
+
+        // Function to remove an ingredient from the cart
+        function removeFromCart(ingredient) {
+            const cartList = document.getElementById('cart-list');
+            const listItem = cartList.querySelector(`li[data-value="${ingredient}"]`);
+            if (listItem) {
+                cartList.removeChild(listItem);
+            }
+            // Uncheck the corresponding checkbox
+            const checkbox = document.querySelector(`input[value="${ingredient}"]`);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+        }
+    </script>
 </body>
 </html>
