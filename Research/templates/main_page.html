@@ -40,43 +40,41 @@
             transform: scale(1.05);
         }
 
-        /* Layout for lists */
-        .list-container {
+        /* Wrapper to hold both ingredient section and cart side by side */
+        .content-wrapper {
             display: flex;
             justify-content: space-between;
             padding: 20px;
         }
 
-        /* Spacing between boxes */
-        .scrollable-list, .cart {
-            margin-right: 15px; /* Space between sections */
-        }
-
-        /* Styling for individual list */
-        .scrollable-list {
-            width: 24%;
-            border: 1px solid #ccc;
-            padding: 10px;
+        /* Ingredient section styling */
+        .ingredient-section-wrapper {
+            flex-grow: 2;
+            border: 2px solid #ccc;
             border-radius: 8px;
-            height: 300px; /* Increased height to make boxes bigger */
+            padding: 10px;
+            margin: 20px;
+            background-color: #f9f9f9;
+            display: grid; /* Changed to grid */
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            gap: 20px; /* Space between grid items */
+            max-height: 400px; /* Set a maximum height */
             overflow-y: auto; /* Enable vertical scrolling */
-        }
-
-        /* Styling for list titles */
-        .scrollable-list h2 {
-            text-align: center;
-            margin-bottom: 10px;
         }
 
         /* Scrollable cart styling */
         .cart {
             padding: 15px;
-            border: 1px solid #ccc;
+            border: 2px solid #ccc;
             border-radius: 8px;
             background-color: #f9f9f9;
-            width: 24%; /* Match width with other lists */
-            height: 300px; /* Match height with other lists */
-            overflow-y: auto; /* Enable vertical scrolling */
+            width: 24%;
+            margin: 20px;
+            overflow-y: auto;
+            margin-left: 20px; /* Space between the cart and ingredients section */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .cart h2 {
@@ -86,6 +84,7 @@
         .cart ul {
             list-style-type: none;
             padding: 0;
+            flex-grow: 1; /* Allows the list to grow and fill available space */
         }
 
         .cart li {
@@ -111,12 +110,11 @@
             color: darkred;
         }
 
-        /* Styling for search input */
+        /* Search container styling */
         .search-container {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
-            margin-top: 15px; /* Added margin-top to create space from the text */
+            margin-top: 20px;
         }
 
         .search-input {
@@ -140,19 +138,41 @@
             background-color: #0056b3;
         }
 
-        /* Example styling for list items */
-        .scrollable-list ul {
-            padding-left: 20px;
+        /* Scrollable list styling */
+        .scrollable-list {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
         }
 
-        .scrollable-list li {
-            margin: 5px 0;
+        .scrollable-list h2 {
+            text-align: center;
         }
 
-        /* Add margin to p */
-        p {
-            margin-bottom: 10px;
+        /* Button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 20px 0; /* Top and sides margin */
         }
+
+        .generate-btn {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px; /* Optional: set a max width for the button */
+        }
+
+        .generate-btn:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -160,64 +180,97 @@
         <h1>Meal Plan App</h1>
     </div>
 
-    <!-- Add some margin to create space between the search bar and text -->
     <p>Select the Ingredients</p>
 
-    <!-- Search container with input and button -->
-    <div class="search-container">
-        <input type="text" class="search-input" id="search-bar" placeholder="Search Ingredients" onkeyup="filterList()">
-        <button class="search-btn" onclick="filterList()">Search</button>
-    </div>
-
     <form action="/generate_recipe" method="POST">
-        <div class="list-container">
-            <!-- Scrollable list 1: Vegetables -->
-            <div class="scrollable-list" id="vegetable-list">
-                <h2>Vegetables</h2>
-                <ul>
-                    <li><input type="checkbox" name="vegetables" value="Carrots" onclick="toggleIngredient(this)"> Carrots</li>
-                    <li><input type="checkbox" name="vegetables" value="Broccoli" onclick="toggleIngredient(this)"> Broccoli</li>
-                    <li><input type="checkbox" name="vegetables" value="Spinach" onclick="toggleIngredient(this)"> Spinach</li>
-                    <li><input type="checkbox" name="vegetables" value="Tomatoes" onclick="toggleIngredient(this)"> Tomatoes</li>
-                    <li><input type="checkbox" name="vegetables" value="Bell Peppers" onclick="toggleIngredient(this)"> Bell Peppers</li>
-                    <li><input type="checkbox" name="vegetables" value="Cauliflower" onclick="toggleIngredient(this)"> Cauliflower</li>
-                    <li><input type="checkbox" name="vegetables" value="Onions" onclick="toggleIngredient(this)"> Onions</li>
-                    <li><input type="checkbox" name="vegetables" value="Lettuce" onclick="toggleIngredient(this)"> Lettuce</li>
-                </ul>
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-bar" placeholder="Search Ingredients" onkeyup="filterList()">
+            <button class="search-btn" onclick="filterList()">Search</button>
+        </div>
+        <!-- Wrapper to hold both the ingredients section and cart side by side -->
+        <div class="content-wrapper">
+            <!-- Ingredients Section -->
+            <div class="ingredient-section-wrapper">
+                <!-- Scrollable list 1: Vegetables -->
+                <div class="scrollable-list" id="vegetable-list">
+                    <h2>Vegetables</h2>
+                    <ul>
+                        <li><input type="checkbox" name="vegetables" value="Carrots" onclick="toggleIngredient(this)"> Carrots</li>
+                        <li><input type="checkbox" name="vegetables" value="Broccoli" onclick="toggleIngredient(this)"> Broccoli</li>
+                        <li><input type="checkbox" name="vegetables" value="Spinach" onclick="toggleIngredient(this)"> Spinach</li>
+                        <li><input type="checkbox" name="vegetables" value="Tomatoes" onclick="toggleIngredient(this)"> Tomatoes</li>
+                        <li><input type="checkbox" name="vegetables" value="Bell Peppers" onclick="toggleIngredient(this)"> Bell Peppers</li>
+                        <li><input type="checkbox" name="vegetables" value="Cauliflower" onclick="toggleIngredient(this)"> Cauliflower</li>
+                        <li><input type="checkbox" name="vegetables" value="Onions" onclick="toggleIngredient(this)"> Onions</li>
+                        <li><input type="checkbox" name="vegetables" value="Lettuce" onclick="toggleIngredient(this)"> Lettuce</li>
+                    </ul>
+                </div>
+
+                <!-- Scrollable list 2: Meat -->
+                <div class="scrollable-list" id="meat-list">
+                    <h2>Meat</h2>
+                    <ul>
+                        <li><input type="checkbox" name="meat" value="Chicken Breast" onclick="toggleIngredient(this)"> Chicken Breast</li>
+                        <li><input type="checkbox" name="meat" value="Ground Beef" onclick="toggleIngredient(this)"> Ground Beef</li>
+                        <li><input type="checkbox" name="meat" value="Pork Chops" onclick="toggleIngredient(this)"> Pork Chops</li>
+                        <li><input type="checkbox" name="meat" value="Turkey" onclick="toggleIngredient(this)"> Turkey</li>
+                    </ul>
+                </div>
+
+                <!-- Scrollable list 3: Dairy -->
+                <div class="scrollable-list" id="dairy-list">
+                    <h2>Dairy</h2>
+                    <ul>
+                        <li><input type="checkbox" name="dairy" value="Milk" onclick="toggleIngredient(this)"> Milk</li>
+                        <li><input type="checkbox" name="dairy" value="Cheddar Cheese" onclick="toggleIngredient(this)"> Cheddar Cheese</li>
+                        <li><input type="checkbox" name="dairy" value="Yogurt" onclick="toggleIngredient(this)"> Yogurt</li>
+                        <li><input type="checkbox" name="dairy" value="Butter" onclick="toggleIngredient(this)"> Butter</li>
+                    </ul>
+                </div>
+
+                <!-- Scrollable list 4: Nuts/Seeds -->
+                <div class="scrollable-list" id="nuts-seeds-list">
+                    <h2>Nuts/Seeds</h2>
+                    <ul>
+                        <li><input type="checkbox" name="nuts_seeds" value="Almonds" onclick="toggleIngredient(this)"> Almonds</li>
+                        <li><input type="checkbox" name="nuts_seeds" value="Walnuts" onclick="toggleIngredient(this)"> Walnuts</li>
+                        <li><input type="checkbox" name="nuts_seeds" value="Peanuts" onclick="toggleIngredient(this)"> Peanuts</li>
+                        <li><input type="checkbox" name="nuts_seeds" value="Cashews" onclick="toggleIngredient(this)"> Cashews</li>
+                    </ul>
+                </div>
+
+                <!-- Scrollable list 5: Fruits -->
+                <div class="scrollable-list" id="fruits-list">
+                    <h2>Fruits</h2>
+                    <ul>
+                        <li><input type="checkbox" name="fruits" value="Apples" onclick="toggleIngredient(this)"> Apples</li>
+                        <li><input type="checkbox" name="fruits" value="Bananas" onclick="toggleIngredient(this)"> Bananas</li>
+                        <li><input type="checkbox" name="fruits" value="Oranges" onclick="toggleIngredient(this)"> Oranges</li>
+                        <li><input type="checkbox" name="fruits" value="Berries" onclick="toggleIngredient(this)"> Blueberries</li>
+                    </ul>
+                </div>
+
+                <!-- Scrollable list 6: Condiments -->
+                <div class="scrollable-list" id="condiments-list">
+                    <h2>Condiments</h2>
+                    <ul>
+                        <li><input type="checkbox" name="condiments" value="Ketchup" onclick="toggleIngredient(this)"> Ketchup</li>
+                        <li><input type="checkbox" name="condiments" value="Mustard" onclick="toggleIngredient(this)"> Mustard</li>
+                        <li><input type="checkbox" name="condiments" value="Soy Sauce" onclick="toggleIngredient(this)"> Soy Sauce</li>
+                        <li><input type="checkbox" name="condiments" value="Olive Oil" onclick="toggleIngredient(this)"> Olive Oil</li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Scrollable list 2: Meat -->
-            <div class="scrollable-list" id="meat-list">
-                <h2>Meat</h2>
-                <ul>
-                    <li><input type="checkbox" name="meat" value="Chicken Breast" onclick="toggleIngredient(this)"> Chicken Breast</li>
-                    <li><input type="checkbox" name="meat" value="Ground Beef" onclick="toggleIngredient(this)"> Ground Beef</li>
-                    <li><input type="checkbox" name="meat" value="Pork Chops" onclick="toggleIngredient(this)"> Pork Chops</li>
-                    <li><input type="checkbox" name="meat" value="Turkey" onclick="toggleIngredient(this)"> Turkey</li>
-                </ul>
-            </div>
-
-            <!-- Scrollable list 3: Dairy -->
-            <div class="scrollable-list" id="dairy-list">
-                <h2>Dairy</h2>
-                <ul>
-                    <li><input type="checkbox" name="dairy" value="Milk" onclick="toggleIngredient(this)"> Milk</li>
-                    <li><input type="checkbox" name="dairy" value="Cheddar Cheese" onclick="toggleIngredient(this)"> Cheddar Cheese</li>
-                    <li><input type="checkbox" name="dairy" value="Yogurt" onclick="toggleIngredient(this)"> Yogurt</li>
-                    <li><input type="checkbox" name="dairy" value="Butter" onclick="toggleIngredient(this)"> Butter</li>
-                </ul>
-            </div>
-
-            <!-- Scrollable cart to display selected ingredients next to Dairy -->
+            <!-- Scrollable cart placed next to the ingredients section -->
             <div class="cart">
                 <h2>Selected Ingredients (Cart)</h2>
                 <ul id="cart-list"></ul>
+                <div class="button-container">
+                    <!-- Submit the form to /generate_recipe -->
+                    <button type="submit" class="generate-btn">Generate Recipe</button>
+                </div>
             </div>
-        </div>
-
-        <div class="header">
-            <!-- Submit the form to /generate_recipe -->
-            <button type="submit">Generate Recipe</button>
         </div>
     </form>
 
