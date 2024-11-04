@@ -16,21 +16,64 @@
 
         body {
             padding: 20px;
+            font-family: Arial, sans-serif;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            font-family: "Young Serif", serif;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: hsl(14, 45%, 36%);
         }
 
         p {
             text-align: center;
-            color: #555;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .recipe-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 50%;
+        }
+        .recipe-details h2 {
+            display: flex;
+            font-size: 28px;
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .recipe-details p {
+            color: #666;
+            font-size: 14px;
+            margin: 0px 0 25px;
+        }
+        .recipe-info {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .recipe-info div {
+            text-align: center;
+            color: hsl(332, 51%, 32%);
+            font-weight: bold;
+            font-size: large;
+        }
+        .recipe-info div span {
+            display: block;
+            color: hsl(332, 51%, 32%);
+            font-size: x-large;
+            font-weight: bold;
         }
 
         /* Styling for the recipe tiles */
         .recipe-container {
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
@@ -42,13 +85,27 @@
             padding: 15px;
             margin: 10px;
             text-align: center;
-            width: 150px;
+            width: 300px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
         }
 
         .recipe-tile:hover {
             transform: scale(1.05); 
+        }
+
+        .ingredients-list {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            padding-left: 75px;
+        }
+
+        .recipe-instructions {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            padding-left: 75px;
         }
 
     </style>
@@ -58,15 +115,42 @@
         <h1>Meal Plan App</h1>
     </div>
     <h1>Recipes:</h1>
-    <p>This is where your generated recipe will appear.</p>
+    <!-- <p>This is where your generated recipe will appear.</p> -->
 
     <div class="recipe-container">
-        <div class="recipe-tile">Recipe 1</div>
-        <div class="recipe-tile">Recipe 2</div>
-        <div class="recipe-tile">Recipe 3</div>
-        <div class="recipe-tile">Recipe 4</div>
-        <div class="recipe-tile">Recipe 5</div>
+        <div class="recipe-image">
+            <img src="/Users/gina/Documents/GitHub/FA24-Group6/Research/food.jpeg0">
+        </div>
+        <div class="recipe-details">
+            <h1>Recipe Name</h1>
+            <p>Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here.</p>
+            <div class="recipe-info">
+                <div>
+                    <span>40</span> minutes
+                </div>
+                <div>
+                    <span>225</span> calories
+                </div>
+                <div>
+                    <span>6</span> ingredients
+                </div>
+            </div>
+        </div>
     </div>
-    
+    <div class="ingredients-and-instructions">
+        
+    </div>
+    <div class="ingredients-list">
+        <h1>Ingredients</h1>
+        <p>Ingredient 1</p>
+        <p>Ingredient 2</p>
+        <p>Ingredient 3</p>
+    </div>
+    <div class="recipe-instructions">
+        <h1>Instructions</h1>
+        <p>Step 1</p>
+        <p>Step 2</p>
+        <p>Step 3</p>
+    </div>
 </body>
 </html>
