@@ -1,0 +1,152 @@
+html,
+body {
+  display: flex;
+  /*makes box movable around the  body*/
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center; /*centers the item to center*/
+  min-height: 100vh;
+  background-color: hsl(30, 54%, 90%);
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.main-container {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  padding: auto;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55%;
+  border-radius: 20px;
+  padding: 2%;
+  background-color: hsl(0, 0%, 100%);
+}
+
+.main-img {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.main-img img {
+  width: 100%;
+  max-height: auto;
+  border-radius: 20px;
+}
+h1 {
+  font-family: "Young Serif", serif;
+  font-size: 2.5em;
+  font-weight: normal;
+}
+
+h2 {
+  font-size: 2em;
+  font-family: "Young Serif", serif;
+  font-weight: normal;
+  color: hsl(14, 45%, 36%);
+}
+.preparation {
+  width: 100%;
+  max-height: auto;
+  background-color: hsl(332 51% 32% / 5%);
+  padding-bottom: 1.5%;
+  padding-top: 1.5%;
+}
+
+.preparation li::marker {
+  color: hsl(332, 51%, 32%);
+}
+
+.preparation ul {
+  padding-left: 5%;
+}
+.ingredients {
+  width: 100%;
+  max-height: auto;
+}
+
+.ingredients li::marker {
+  color: hsl(14, 45%, 36%);
+}
+
+li span {
+  position: relative;
+  left: 1%;
+}
+
+.time,
+.items,
+.steps {
+  line-height: 2;
+}
+
+ol,
+h3,
+.items {
+  padding-left: 2.5%;
+}
+
+h3 {
+  font-size: 1.5;
+  color: hsl(332, 51%, 32%);
+}
+hr {
+  opacity: 50%;
+}
+.instruction {
+  width: 100%;
+  max-height: auto;
+}
+
+.instruction li::marker {
+  color: hsl(332, 51%, 32%);
+  font-weight: bold;
+}
+
+.nutrition {
+  width: 100%;
+  max-height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.nutrients {
+  padding-left: 2.5%;
+}
+
+.amount {
+  color: hsl(14, 45%, 36%);
+  font-weight: bold;
+}
+/*fonts*/
+.young-serif-regular {
+  font-family: "Young Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.outfit-400-600-700 {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400, 600, 700;
+  font-style: normal;
+}
+
+p,
+h3,
+ul,
+ol,
+td {
+  font-family: "Outfit", sans-serif;
+  color: hsl(24, 5%, 18%);
+}
