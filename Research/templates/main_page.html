@@ -171,7 +171,9 @@
         <div class="content-wrapper">
             <div class="cart">
                 <h2>Selected Ingredients (Cart)</h2>
-                <ul id="cart-list"></ul>
+                <ul id="cart-list">
+                    <!-- Hidden input fields for selected ingredients will be added here -->
+                </ul>
                 <div class="button-container">
                     <button type="submit" class="generate-btn">Generate Recipe</button>
                 </div>
@@ -185,14 +187,26 @@
             const ingredient = ingredientInput.value.trim();
             if (ingredient) {
                 const cartList = document.getElementById('cart-list');
+
+                // Prevent duplicate ingredients
+                const existingItem = cartList.querySelector(`li[data-value="${ingredient}"]`);
+                if (existingItem) {
+                    alert("Ingredient already in the cart!");
+                    ingredientInput.value = '';
+                    return;
+                }
+
+                // Add ingredient to cart visually
                 const listItem = document.createElement('li');
                 listItem.setAttribute('data-value', ingredient);
                 listItem.innerHTML = `
                     <span>${ingredient}</span>
                     <button class="remove-btn" onclick="removeFromCart('${ingredient}')">X</button>
+                    <input type="hidden" name="ingredients" value="${ingredient}"> <!-- Hidden input field -->
                 `;
                 cartList.appendChild(listItem);
-                ingredientInput.value = ''; // Clear input after adding
+
+                ingredientInput.value = ''; // Clear input
             }
         }
 

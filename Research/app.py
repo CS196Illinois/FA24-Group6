@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request
 import pandas as pd
+import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 
 # Load and preprocess the dataset
-filepath = '/Users/ellenmin/Desktop/FA24-Group6/Research/13k-recipes.csv'
+script_dir = os.path.dirname(os.path.abspath("Research/13k-recipes.csv"))
+filepath = os.path.join(script_dir, "13k-recipes.csv")
 data = pd.read_csv(filepath).head(1000)
 data = data.drop(columns=['Unnamed: 0', 'Ingredients', 'Image_Name'])
 
@@ -31,14 +33,16 @@ data['Cleaned_Ingredients'] = cleanedIngredientsFinal
 vectorizer = TfidfVectorizer()
 matrix = vectorizer.fit_transform(data['Cleaned_Ingredients'])
 
-
 # Function to recommend meals based on user input
 def recommend_meal(userIngredients):
+    if not userIngredients.strip():
+        # Return random recommendations if no ingredients are provided
+        return data.sample(15)[['Title', 'Instructions']]
+    
     userVec = vectorizer.transform([userIngredients])
     scores = cosine_similarity(userVec, matrix).flatten()
     topIndices = scores.argsort()[-15:][::-1]
     return data.iloc[topIndices][['Title', 'Instructions']]
-
 
 # Flask Routes
 @app.route('/')
@@ -47,13 +51,14 @@ def home():
 
 @app.route('/generate_recipe', methods=['POST'])
 def generate_recipe():
-    # Get selected ingredients from the cart
-    selected_ingredients = request.form.getlist('ingredients')
-    user_input = ", ".join(selected_ingredients)
-    
+    # Collect selected ingredients from the form
+    selected_ingredients = request.form.getlist('ingredients')  # Collect hidden inputs
+
+    user_input = ", ".join(selected_ingredients)  # Combine into a single string
+
     # Get recommended meals
     recommendations = recommend_meal(user_input)
-    
+
     # Pass recommendations to the food list page
     return render_template(
         'food_list.html',
@@ -71,7 +76,6 @@ def recipe():
     recipe_dict = recipe_data.to_dict()
     
     return render_template('recipe_page.html', food=recipe_dict)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
