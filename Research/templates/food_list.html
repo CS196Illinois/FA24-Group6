@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food List</title>
     <style>
+        body {
+            /* background-image: url('background.jpg'); */
+            background-size: cover; /* Ensures the image covers the entire background */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            background-attachment: fixed; /* Keeps the background in place while scrolling */
+            background-position: center; /* Centers the background image */
+            background-color: #f6efebff;
+        }
+
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 35px;
-            background-color: #f0f0f0;
+            background-color: #f6efebff;
             border-bottom: 2px solid #ccc;
         }
 
@@ -20,12 +29,12 @@
 
         h1 {
             text-align: center;
-            color: #333;
+            color: hsl(14, 45%, 36%);
         }
 
         p {
             text-align: center;
-            color: #555;
+            color: #51271d;
         }
 
         /* Styling for the Food tiles */
@@ -55,13 +64,6 @@
             transform: scale(1.05); 
         }
 
-        /* Placeholder for food image */
-        .food-image {
-            width: 100%;
-            height: 150px; /* Space for the image */
-            background-color: #0056b3; /* Placeholder for the image */
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -74,23 +76,18 @@
     <div class="food-container">
         <!-- Each food tile is now clickable and leads to the recipe page -->
         <a href="/recipe?food=Food1" class="food-tile">
-            <div class="food-image"></div>
             Food 1
         </a>
         <a href="/recipe?food=Food2" class="food-tile">
-            <div class="food-image"></div>
             Food 2
         </a>
         <a href="/recipe?food=Food3" class="food-tile">
-            <div class="food-image"></div>
             Food 3
         </a>
         <a href="/recipe?food=Food4" class="food-tile">
-            <div class="food-image"></div>
             Food 4
         </a>
         <a href="/recipe?food=Food5" class="food-tile">
-            <div class="food-image"></div>
             Food 5
         </a>
     </div>
