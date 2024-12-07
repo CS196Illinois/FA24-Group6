@@ -3,162 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food List</title>
+    <title>{{ food['Title'] }}</title>
     <style>
         body {
-            /* background-image: url('background.jpg'); */
-            background-size: cover; /* Ensures the image covers the entire background */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Keeps the background in place while scrolling */
-            background-position: center; /* Centers the background image */
+            font-family: Arial, sans-serif;
+            padding: 20px;
             background-color: #f6efebff;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 35px;
-            background-color: #f6efebff;
-            border-bottom: 2px solid #ccc;
         }
 
-        body {
+        .header {
+            text-align: center;
             padding: 20px;
-            font-family: Arial, sans-serif;
+            background-color: hsl(14, 45%, 36%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .recipe-container {
+            margin: 20px auto;
+            max-width: 800px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            text-align: center;
-            font-family: "Young Serif", serif;
-            font-size: 2.5em;
-            font-weight: bold;
             color: hsl(14, 45%, 36%);
         }
 
-        p {
-            text-align: center;
-            color: #666;
-            font-weight: bold;
+        .ingredients, .instructions {
+            margin-bottom: 20px;
         }
 
-        .recipe-details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            width: 50%;
-        }
-        .recipe-details h2 {
-            display: flex;
-            font-size: 28px;
-            margin: 0 0 10px;
-            color: #333;
-        }
-        .recipe-details p {
-            color: #666;
-            font-size: 14px;
-            margin: 0px 0 25px;
-        }
-        .recipe-info {
-            display: flex;
-            gap: 20px;
-            font-size: 18px;
-            color: #333;
-        }
-        .recipe-info div {
-            text-align: center;
-            color: hsl(332, 51%, 32%);
-            font-weight: bold;
-            font-size: large;
-        }
-        .recipe-info div span {
-            display: block;
-            color: hsl(332, 51%, 32%);
-            font-size: x-large;
-            font-weight: bold;
+        .ingredients ul {
+            list-style-type: disc;
+            margin-left: 20px;
         }
 
-        /* Styling for the recipe tiles */
-        .recipe-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
+        .back-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: hsl(14, 45%, 36%);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
         }
 
-        .recipe-tile {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+        .back-btn:hover {
+            background-color: hsl(14, 46%, 25%);
         }
-
-        .recipe-tile:hover {
-            transform: scale(1.05); 
-        }
-
-        .ingredients-list {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            padding-left: 75px;
-        }
-
-        .recipe-instructions {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            padding-left: 75px;
-        }
-
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Meal Plan App</h1>
+        <h1>{{ food['Title'] }}</h1>
     </div>
-    <h1>Recipes:</h1>
-    <!-- <p>This is where your generated recipe will appear.</p> -->
 
     <div class="recipe-container">
-        <div class="recipe-image">
-            <img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" style="width: 500px; height: 375px;">
+        <div class="ingredients">
+            <h2>Ingredients</h2>
+            <ul>
+                {% for ingredient in food['Cleaned_Ingredients'].split(', ') %}
+                <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
         </div>
-        <div class="recipe-details">
-            <h1>Recipe Name</h1>
-            <p>Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here. Recipe Description here.</p>
-            <div class="recipe-info">
-                <div>
-                    <span>40</span> minutes
-                </div>
-                <div>
-                    <span>225</span> calories
-                </div>
-                <div>
-                    <span>6</span> ingredients
-                </div>
-            </div>
+
+        <div class="instructions">
+            <h2>Instructions</h2>
+            <p>{{ food['Instructions'] }}</p>
         </div>
-    </div>
-    <div class="ingredients-and-instructions">
-        
-    </div>
-    <div class="ingredients-list">
-        <h1>Ingredients</h1>
-        <p>Ingredient 1</p>
-        <p>Ingredient 2</p>
-        <p>Ingredient 3</p>
-    </div>
-    <div class="recipe-instructions">
-        <h1>Instructions</h1>
-        <p>Step 1</p>
-        <p>Step 2</p>
-        <p>Step 3</p>
+
+        <a href="/" class="back-btn">Back to Home</a>
     </div>
 </body>
 </html>

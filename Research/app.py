@@ -63,7 +63,15 @@ def generate_recipe():
 @app.route('/recipe')
 def recipe():
     food_item = request.args.get('food', 'Unknown Food')
-    return render_template('recipe_page.html', food=food_item)
+    
+    # Find the selected recipe from the dataset
+    recipe_data = data[data['Title'] == food_item].iloc[0]
+    
+    # Convert the row to a dictionary to pass to the template
+    recipe_dict = recipe_data.to_dict()
+    
+    return render_template('recipe_page.html', food=recipe_dict)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
