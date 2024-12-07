@@ -6,14 +6,8 @@
     <title>Food List</title>
     <style>
         body {
-            /* background-image: url('background.jpg'); */
-            background-size: cover; /* Ensures the image covers the entire background */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Keeps the background in place while scrolling */
-            background-position: center; /* Centers the background image */
             background-color: #f6efebff;
         }
-
         .header {
             display: flex;
             align-items: center;
@@ -22,29 +16,16 @@
             background-color: #f6efebff;
             border-bottom: 2px solid #ccc;
         }
-
-        body {
-            padding: 20px;
-        }
-
-        h1 {
+        h1, p {
             text-align: center;
             color: hsl(14, 45%, 36%);
         }
-
-        p {
-            text-align: center;
-            color: #51271d;
-        }
-
-        /* Styling for the Food tiles */
         .food-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
         }
-
         .food-tile {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -52,45 +33,31 @@
             margin: 10px;
             text-align: center;
             width: 200px;
-            height: 250px; /* Increased height for image placeholder */
+            height: 250px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
             cursor: pointer;
             text-decoration: none;
-            color: inherit; /* Maintain the text color */
+            color: inherit;
         }
-
         .food-tile:hover {
             transform: scale(1.05); 
         }
-
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Meal Plan App</h1>
     </div>
-    <h1>Foods:</h1>
-    <p>Select a food to view the recipe:</p>
-
+    <h1>Recommended Meals:</h1>
     <div class="food-container">
-        <!-- Each food tile is now clickable and leads to the recipe page -->
-        <a href="/recipe?food=Food1" class="food-tile">
-            Food 1
-        </a>
-        <a href="/recipe?food=Food2" class="food-tile">
-            Food 2
-        </a>
-        <a href="/recipe?food=Food3" class="food-tile">
-            Food 3
-        </a>
-        <a href="/recipe?food=Food4" class="food-tile">
-            Food 4
-        </a>
-        <a href="/recipe?food=Food5" class="food-tile">
-            Food 5
-        </a>
+        {% for recipe in recommendations %}
+        <div class="food-tile">
+            <h3>{{ recipe['Title'] }}</h3>
+            <p>{{ recipe['Instructions'][:150] }}...</p>
+            <a href="/recipe?food={{ recipe['Title'] }}">View Full Recipe</a>
+        </div>
+        {% endfor %}
     </div>
-    
 </body>
 </html>
