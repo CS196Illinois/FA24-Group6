@@ -18,7 +18,13 @@
         }
         h1, p {
             text-align: center;
+            margin: 0;
             color: hsl(14, 45%, 36%);
+        }
+        h2 {
+            margin: 25px;
+            color: hsl(14, 45%, 36%);
+            text-align: center;
         }
         .food-container {
             display: flex;
@@ -49,7 +55,7 @@
     <div class="header">
         <h1>Meal Plan App</h1>
     </div>
-    <h1>Recommended Meals:</h1>
+    <h2>Recommended Meals:</h2>
     <div class="food-container">
         {% for recipe in recommendations %}
         <div class="food-tile">

@@ -6,18 +6,16 @@
     <title>{{ food['Title'] }}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
             background-color: #f6efebff;
         }
 
         .header {
-            text-align: center;
-            padding: 20px;
-            background-color: hsl(14, 45%, 36%);
-            color: white;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 35px;
+            background-color: #f6efebff;
+            border-bottom: 2px solid #ccc;
         }
 
         .recipe-container {
@@ -29,8 +27,16 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
+        h1, p {
+            text-align: center;
+            margin: 0;
             color: hsl(14, 45%, 36%);
+        }
+
+        h2 {
+            margin: 25px;
+            color: hsl(14, 45%, 36%);
+            text-align: center;
         }
 
         .ingredients, .instructions {
@@ -59,8 +65,9 @@
 </head>
 <body>
     <div class="header">
-        <h1>{{ food['Title'] }}</h1>
+        <h1>Meal Plan App</h1>
     </div>
+    <h2>{{ food['Title'] }}</h2>
 
     <div class="recipe-container">
         <div class="ingredients">
